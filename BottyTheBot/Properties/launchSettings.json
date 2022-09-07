@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FromSiteToDb": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
