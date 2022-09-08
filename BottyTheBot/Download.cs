@@ -23,7 +23,6 @@ namespace Downloading
                 client.DownloadFileAsync(new Uri("https://проверки.гувм.мвд.рф/upload/expired-passports/list_of_expired_passports.csv.bz2"), "list_of_expired_passports.csv.bz2");
                 completedSignal.WaitOne();
             }
-            //return Task.CompletedTask;
         }
     }
 }
