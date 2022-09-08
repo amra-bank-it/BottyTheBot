@@ -11,8 +11,9 @@ while (true)
     var engine = new FileHelperAsyncEngine<Passp>();
     SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Parser"].ConnectionString);
     con.Open();
-    string sql = @"delete Passports";
+    string sql = @"delete Pasports";
     SqlCommand cmd = new SqlCommand(sql, con);
+
     cmd.ExecuteNonQuery();
     con.Close();
 
