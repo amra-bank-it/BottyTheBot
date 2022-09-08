@@ -19,7 +19,7 @@ while (true)
     Download.Loading();
     BZ2.Unpacking();
 
-    using (engine.BeginReadFile(@"\app\list_of_expired_passports_decomp.csv"))
+    using (engine.BeginReadFile(@"list_of_expired_passports_decomp.csv"))
     {
         Console.WriteLine("Производится запись в базу данных, пожалуйста, подождите.");
 

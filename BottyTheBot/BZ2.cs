@@ -6,11 +6,11 @@ namespace ArchiveUnpacker
     {
         public static void Unpacking()
         {
-            FileInfo zipFileName = new FileInfo(@"\app\list_of_expired_passports.csv.bz2");
+            FileInfo zipFileName = new FileInfo(@"list_of_expired_passports.csv.bz2");
             FileStream fileToDecompressAsStream = zipFileName.OpenRead();
 
             Console.WriteLine("Производится распаковка данных, пожалуйста, подождите.");
-            string decompressedFileName = @"\app\list_of_expired_passports_decomp.csv";
+            string decompressedFileName = @"list_of_expired_passports_decomp.csv";
             FileStream decompressedStream = File.Create(decompressedFileName);
             {
                 try
