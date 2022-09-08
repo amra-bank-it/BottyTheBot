@@ -8,7 +8,6 @@ using System.Net;
 
 while (true)
 {
-    Thread.Sleep(1000 * 60 * 60 * 24 * 7);
     var engine = new FileHelperAsyncEngine<Passp>();
     SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Parser"].ConnectionString);
     con.Open();
@@ -30,4 +29,5 @@ while (true)
         }
         Console.WriteLine("Запись в базу данных завершена.");
     }
+    Thread.Sleep(1000 * 60 * 60 * 24 * 7);
 }
