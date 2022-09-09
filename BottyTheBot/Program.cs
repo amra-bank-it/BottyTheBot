@@ -8,7 +8,12 @@ using System.Net;
 
 while (true)
 {
-    Console.WriteLine("...");
+    DateTime date2, littime;
+    date2 = DateTime.UtcNow;
+    TimeSpan ts = new TimeSpan(03, 00, 00);
+    littime = date2 + ts;
+    Console.WriteLine("Программа запущена");
+    Console.WriteLine(littime);
 
     var engine = new FileHelperAsyncEngine<Passp>();
     SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Parser"].ConnectionString);
@@ -33,5 +38,6 @@ while (true)
         }
         Console.WriteLine("Запись в базу данных завершена.");
     }
+
     Thread.Sleep(1000 * 60 * 60 * 24 * 7);
 }

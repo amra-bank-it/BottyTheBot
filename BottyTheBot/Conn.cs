@@ -15,7 +15,6 @@ public class Conn
             date2 = DateTime.UtcNow;
             TimeSpan ts = new TimeSpan(03, 00, 00);
             littime = date2 + ts;
-            Console.WriteLine(littime);
             command.Parameters.AddWithValue("@PASSP_SERIES", pass.PASSP_SERIES);
             command.Parameters.AddWithValue("@PASSP_NUMBER", pass.PASSP_NUMBER);
             command.Parameters.AddWithValue("@CUR_TIME", littime);
