@@ -11,10 +11,14 @@ public class Conn
             SqlConnection conect = new SqlConnection(ConfigurationManager.ConnectionStrings["Parser"].ConnectionString);
             string query = "INSERT INTO Pasports (PASSP_SERIES, PASSP_NUMBER, CUR_TIME) VALUES (@PASSP_SERIES, @PASSP_NUMBER, @CUR_TIME)";
             SqlCommand command = new SqlCommand(query, conect);
-            DateTime dateTimeNow = DateTime.Now; 
+            DateTime date2, littime;
+            date2 = DateTime.UtcNow;
+            TimeSpan ts = new TimeSpan(03, 00, 00);
+            littime = date2 + ts;
+            Console.WriteLine(littime);
             command.Parameters.AddWithValue("@PASSP_SERIES", pass.PASSP_SERIES);
             command.Parameters.AddWithValue("@PASSP_NUMBER", pass.PASSP_NUMBER);
-            command.Parameters.AddWithValue("@CUR_TIME", dateTimeNow);
+            command.Parameters.AddWithValue("@CUR_TIME", littime);
             try
             {
                 conect.Open();
@@ -22,7 +26,7 @@ public class Conn
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Произошла ошибка при передаче данных в базу. Код ошибки: " + e.ToString());
+                Console.WriteLine("Произошла ошибка при п ередаче данных в базу. Код ошибки: " + e.ToString());
             }
             finally
             {
