@@ -9,14 +9,6 @@ namespace Downloading
             using (var client = new WebClient())
             using (var completedSignal = new AutoResetEvent(false))
             {
-                Console.WriteLine("Производится загрузка данных, пожалуйста, подождите."); 
-                client.DownloadProgressChanged += (s, e) =>
-                    {
-                        double dProgress = ((double)e.BytesReceived / e.TotalBytesToReceive) * 100.0;
-                        Console.WriteLine($"Данные загружены на {dProgress} %");
-                    };
-                client.DownloadFileAsync(new Uri("https://проверки.гувм.мвд.рф/upload/expired-passports/list_of_expired_passports.csv.bz2"), "list_of_expired_passports.csv.bz2");
-                completedSignal.WaitOne();
                 client.DownloadFileCompleted += (s, e) =>
                 {
                     Console.WriteLine("Загрузка завершена.");
@@ -27,6 +19,14 @@ namespace Downloading
                     littime = date2 + ts;
                     Console.WriteLine(littime);
                 };
+                Console.WriteLine("Производится загрузка данных, пожалуйста, подождите.");
+                client.DownloadProgressChanged += (s, e) =>
+                    {
+                        double dProgress = (((double)e.BytesReceived / e.TotalBytesToReceive) * 100.0);
+                        Console.WriteLine($"Данные загружены на {dProgress} %");
+                    };
+                client.DownloadFileAsync(new Uri("https://проверки.гувм.мвд.рф/upload/expired-passports/list_of_expired_passports.csv.bz2"), "list_of_expired_passports.csv.bz2");
+                completedSignal.WaitOne();
             }
         }
     }
