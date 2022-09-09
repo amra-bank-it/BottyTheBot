@@ -8,11 +8,14 @@ using System.Net;
 
 while (true)
 {
+    Console.WriteLine("...");
+
     var engine = new FileHelperAsyncEngine<Passp>();
     SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Parser"].ConnectionString);
     con.Open();
     string sql = @"delete Pasports";
     SqlCommand cmd = new SqlCommand(sql, con);
+    cmd.CommandTimeout = 0;
 
     cmd.ExecuteNonQuery();
     con.Close();
