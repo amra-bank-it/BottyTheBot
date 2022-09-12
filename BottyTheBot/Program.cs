@@ -1,10 +1,10 @@
 ﻿using ArchiveUnpacker;
+using CopyToDB;
 using Downloading;
 using FileHelpers;
 using MVD;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Net;
 
 while (true)
 {
@@ -18,7 +18,7 @@ while (true)
     var engine = new FileHelperAsyncEngine<Passp>();
     SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Parser"].ConnectionString);
     con.Open();
-    string sql = @"delete Pasports";
+    string sql = @"delete Passports_Buffer";
     SqlCommand cmd = new SqlCommand(sql, con);
     cmd.CommandTimeout = 0;
 
@@ -38,6 +38,8 @@ while (true)
         }
         Console.WriteLine("Запись в базу данных завершена.");
     }
+
+    Copy.InsertToDB();
 
     Thread.Sleep(1000 * 60 * 60 * 24 * 7);
 }
