@@ -16,12 +16,11 @@ while (true)
     Console.WriteLine(littime);
 
     var engine = new FileHelperAsyncEngine<Passp>();
-    SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Parser"].ConnectionString);
+    SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Expired_Passports"].ConnectionString);
     con.Open();
-    string sql = @"delete Passports_Buffer";
+    string sql = @"delete list_of_expired_passports_buffer";
     SqlCommand cmd = new SqlCommand(sql, con);
     cmd.CommandTimeout = 0;
-
     cmd.ExecuteNonQuery();
     con.Close();
 
@@ -30,13 +29,13 @@ while (true)
 
     using (engine.BeginReadFile(@"list_of_expired_passports_decomp.csv"))
     {
-        Console.WriteLine("Производится запись в базу данных, пожалуйста, подождите.");
+        Console.WriteLine("Производится запись в буферную базу данных, пожалуйста, подождите.");
 
         foreach (Passp pass in engine)
         {
             Conn.ConnToDb(pass);
         }
-        Console.WriteLine("Запись в базу данных завершена.");
+        Console.WriteLine("Запись в буферную базу данных завершена.");
     }
 
     Copy.InsertToDB();

@@ -9,8 +9,8 @@ public class Conn
     {
         if (pass.PASSP_SERIES != "PASSP_SERIES" && pass.PASSP_NUMBER != "PASSP_NUMBER")
         {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Parser"].ConnectionString);
-            string query = "INSERT INTO Passports_Buffer (PASSP_SERIES, PASSP_NUMBER, CUR_TIME) VALUES (@PASSP_SERIES, @PASSP_NUMBER, @CUR_TIME)";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Expired_Passports"].ConnectionString);
+            string query = "INSERT INTO list_of_expired_passports_buffer (PASSP_SERIES, PASSP_NUMBER, CUR_TIME) VALUES (@PASSP_SERIES, @PASSP_NUMBER, @CUR_TIME)";
             SqlCommand command = new SqlCommand(query, con);
 
             DateTime date2, littime;

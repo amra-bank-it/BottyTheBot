@@ -7,19 +7,38 @@ namespace CopyToDB
     {
         public static void InsertToDB()
         {
-            SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["Parser"].ConnectionString);
-            SqlCommand command1 = new SqlCommand("delete Passports", conection);
-            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Parser"].ConnectionString);
-            SqlCommand command2 = new SqlCommand("INSERT INTO Passports SELECT* FROM Passports_Buffer", connect);
-
+            SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["Expired_Passports"].ConnectionString);
+            SqlCommand command1 = new SqlCommand("delete list_of_expired_passports", conection);
+            SqlConnection connected = new SqlConnection(ConfigurationManager.ConnectionStrings["Expired_Passports"].ConnectionString);
+            SqlCommand command2 = new SqlCommand("SELECT * FROM list_of_expired_passports_buffer ORDER BY CUR_TIME ASC", connected);
+            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Expired_Passports"].ConnectionString);
+            SqlCommand command3 = new SqlCommand("INSERT INTO list_of_expired_passports SELECT* FROM list_of_expired_passports_buffer", connect);
+            
             try
             {
                 conection.Open();
                 command1.ExecuteNonQuery();
+                Console.WriteLine("Удаление данных из базы завершено");
+
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Произошла ошибка при передаче данных в базу. Код ошибки: " + e.ToString());
+                Console.WriteLine("Произошла ошибка при удалении данных из базы. Код ошибки: " + e.ToString());
+            }
+            finally
+            {
+                conection.Close();
+            }
+            try
+            {
+                conection.Open();
+                command1.ExecuteNonQuery();
+                Console.WriteLine("Сортировка данных по дате завершена");
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Произошла ошибка при сортировке данных по дате. Код ошибки: " + e.ToString());
             }
             finally
             {
@@ -28,7 +47,9 @@ namespace CopyToDB
             try
             {
                 connect.Open();
-                command2.ExecuteNonQuery();
+                command3.ExecuteNonQuery();
+                Console.WriteLine("Передача данных в базу завершена");
+
             }
             catch (SqlException e)
             {
