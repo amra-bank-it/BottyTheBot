@@ -17,6 +17,7 @@ namespace CopyToDB
             try
             {
                 conection.Open();
+                command1.CommandTimeout = 0;
                 command1.ExecuteNonQuery();
                 Console.WriteLine("Удаление данных из базы завершено");
 
@@ -32,7 +33,8 @@ namespace CopyToDB
             try
             {
                 conection.Open();
-                command1.ExecuteNonQuery();
+                command2.CommandTimeout = 0;
+                command2.ExecuteNonQuery();
                 Console.WriteLine("Сортировка данных по дате завершена");
 
             }
@@ -47,6 +49,7 @@ namespace CopyToDB
             try
             {
                 connect.Open();
+                command3.CommandTimeout = 0;
                 command3.ExecuteNonQuery();
                 Console.WriteLine("Передача данных в базу завершена");
 

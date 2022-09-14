@@ -19,7 +19,7 @@ namespace Downloading
                     littime = date2 + ts;
                     Console.WriteLine(littime);
                 };
-                Console.WriteLine("Производится загрузка данных, пожалуйста, подождите.");
+            Console.WriteLine("Производится загрузка данных, пожалуйста, подождите.");
                 client.DownloadProgressChanged += (s, e) =>
                     {
                         double dProgress = (((double)e.BytesReceived / e.TotalBytesToReceive) * 100.0);
